@@ -64,6 +64,7 @@ export default {
     }
 
     if (url === "/api/appointments") {
+      /* Resolve appointments data */
       return Promise.resolve({
         status: 200,
         statusText: "OK",
@@ -72,11 +73,42 @@ export default {
     }
 
     if (url === "/api/interviewers") {
+      /* Resolve interviewers data */
       return Promise.resolve({
         status: 200,
-        statusText: "Ok",
+        statusText: "OK",
         data: fixtures.interviewers,
       });
     }
   }),
-}
+};
+
+// export default {
+//   get: jest.fn((url) => {
+//     switch (url) {
+//       case "/api/days":
+//         return Promise.resolve({
+//           status: 200,
+//           statusText: "OK",
+//           data: fixtures.days,
+//         });
+
+//       case "/api/appointments":
+//         return Promise.resolve({
+//           status: 200,
+//           statusText: "OK",
+//           data: fixtures.appointments,
+//         });
+
+//       case "/api/interviewers":
+//         return Promise.resolve({
+//           status: 200,
+//           statusText: "OK",
+//           data: fixtures.interviewers,
+//         });
+
+//       default:
+//         return Promise.reject(new Error(`Unhandled request: ${url}`));
+//     }
+//   }),
+// };
