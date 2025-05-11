@@ -1,5 +1,5 @@
 import React from "react";
-import { render, fireEvent, getByText, prettyDOM, getAllByTestId, getByAltText, getByPlaceholderText, queryByText, findByText} from "@testing-library/react";
+import { render, fireEvent, getByText, getAllByTestId, getByAltText, getByPlaceholderText, queryByText, findByText} from "@testing-library/react";
 import "@testing-library/jest-dom";
 import Application from "../Application";
 
