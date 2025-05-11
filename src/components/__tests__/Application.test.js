@@ -1,5 +1,5 @@
 import React from "react";
-import { render, fireEvent, getByText, prettyDOM, getAllByTestId, getByAltText, getByPlaceholderText} from "@testing-library/react";
+import { render, fireEvent, getByText, prettyDOM, getAllByTestId, getByAltText, getByPlaceholderText, queryByText} from "@testing-library/react";
 import "@testing-library/jest-dom";
 import Application from "../Application";
 
@@ -15,7 +15,7 @@ describe("Application", () => {
   });
 
   it("loads data, books an interview and reduces the spots remaining for the first day by 1", async () => {
-    const { container, findByText } = render(<Application />);
+    const { container, findByText, debug } = render(<Application />);
 
 
     await findByText("Archie Cohen");
@@ -30,5 +30,9 @@ describe("Application", () => {
     fireEvent.click(getByAltText(appointment, "Sylvia Palmer"));
 
     fireEvent.click(getByText(appointment, "Save"));
-      })
+    debug();
+    expect(queryByText(appointment, "Saving")).toBeInTheDocument();
+    });
+
+
 })
