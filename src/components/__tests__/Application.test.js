@@ -39,4 +39,4 @@ describe("Application", () => {
     });
 
 
-})
+});
