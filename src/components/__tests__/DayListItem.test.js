@@ -1,5 +1,5 @@
 import React from "react";
-import { render, getAllByTestId, fireEvent, queryByAltText, queryByText, getByText, findByText, findByAltText, getByPlaceholderText, prettyDOM} from "@testing-library/react";
+import { render, getAllByTestId, fireEvent, queryByAltText, queryByText, getByText, findByText, findByAltText, getByPlaceholderText } from "@testing-library/react";
 import "@testing-library/jest-dom";
 import Application from "../Application";
 import axios from "axios";
@@ -34,7 +34,7 @@ describe("DayListItem", () => {
 
   it("loads data, edits an interview and keeps the spots remaining for Monday the same", async () => {
     // 1. Render the Application.
-    const { container, debug} = render(<Application />);
+    const { container } = render(<Application />);
   
     // 2. Wait until the text "Archie Cohen" is displayed.
     await findByText(container, "Archie Cohen");
@@ -66,4 +66,7 @@ describe("DayListItem", () => {
     axios.put.mockRejectedValueOnce();
   });
 
+  it("shows the delete error when failing to delete an existing appointment", () => {
+    axios.delete.mockRejectedValueOnce();
+  });
 });
