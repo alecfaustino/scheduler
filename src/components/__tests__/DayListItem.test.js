@@ -2,6 +2,7 @@ import React from "react";
 import { render, getAllByTestId, fireEvent, queryByAltText, queryByText, getByText, findByText, findByAltText, getByPlaceholderText, prettyDOM} from "@testing-library/react";
 import "@testing-library/jest-dom";
 import Application from "../Application";
+import axios from "axios";
 
 describe("DayListItem", () => {
   it("loads data, cancels an interview and increases the spots remaining for Monday by 1", async () => {
@@ -61,5 +62,8 @@ describe("DayListItem", () => {
     
   });
 
+  it("shows the save error when failing to save an appointment", () => {
+    axios.put.mockRejectedValueOnce();
+  });
 
 });
