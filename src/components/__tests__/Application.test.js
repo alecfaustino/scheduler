@@ -1,5 +1,5 @@
 import React from "react";
-import { render, fireEvent, getByText, prettyDOM, getAllByTestId, getByAltText, getByPlaceholderText, queryByText} from "@testing-library/react";
+import { render, fireEvent, getByText, prettyDOM, getAllByTestId, getByAltText, getByPlaceholderText, queryByText, findByText} from "@testing-library/react";
 import "@testing-library/jest-dom";
 import Application from "../Application";
 
@@ -15,13 +15,12 @@ describe("Application", () => {
   });
 
   it("loads data, books an interview and reduces the spots remaining for the first day by 1", async () => {
-    const { container, findByText, debug } = render(<Application />);
+    const { container, debug } = render(<Application />);
 
 
-    await findByText("Archie Cohen");
+    await findByText(container, "Archie Cohen");
     const appointments = getAllByTestId(container, "appointment");
     const appointment = appointments[0];
-    console.log(prettyDOM(appointment));
 
     fireEvent.click(getByAltText(appointment, "Add"));
     fireEvent.change(getByPlaceholderText(appointment, /enter student name/i), {
@@ -30,8 +29,13 @@ describe("Application", () => {
     fireEvent.click(getByAltText(appointment, "Sylvia Palmer"));
 
     fireEvent.click(getByText(appointment, "Save"));
-    debug();
     expect(queryByText(appointment, "Saving")).toBeInTheDocument();
+
+    await findByText(appointment, "Lydia Miller-Jones");
+
+    const day = getAllByTestId(container, "day").find((day) => queryByText(day, "Monday"));
+
+    expect(queryByText(day, "no spots remaining")).toBeInTheDocument();
     });
 
 
